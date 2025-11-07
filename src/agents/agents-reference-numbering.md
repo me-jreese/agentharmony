@@ -1,4 +1,4 @@
-# 📘 io’s Numbering Systems for Instructions & Documentation
+# 📘 Numbering Systems for Instructions & Documentation
 
 ---
 
