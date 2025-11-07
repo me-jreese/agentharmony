@@ -1,0 +1,14 @@
+# agents-reference-issues.yaml
+# Placeholder issue tracker — to be updated during project debugging
+
+- id: XXX-BUG-000
+  title: Descriptive title for the issue
+  description: Exhaustive description of the issue and its history
+  impacts:
+    - XXX-FTR-004
+    - XXX-FTR-010
+  status: Open
+  debug_log:
+    - "2025-10-01T17:45:00Z: update 1"
+    - "2025-10-02T17:45:00Z: update 2"
+    - "2025-10-03T17:45:00Z: update 3"

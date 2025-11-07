@@ -1,0 +1,12 @@
+version: 1
+generated_at: "<update-with-iso8601-timestamp>"
+projects:
+  - name: example-project
+    prefix: EXP
+    path: projects/example-project
+    last_sprint: "<YYYY-MM.Sprint>"
+    summary: >
+      Replace this block with a concise description of the project's mission,
+      architecture highlights, and current focus. Duplicate this entry for each
+      active project you want agents to discover automatically.
+    parent: "<optional-parent-project>"

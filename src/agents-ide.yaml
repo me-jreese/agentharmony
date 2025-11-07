@@ -1,0 +1,22 @@
+# agents-ide.yaml
+# Replace each placeholder entry with the actual workstation + IDE info for this project.
+
+- title: IDE
+  developer: "<JetBrains / Microsoft / other>"
+  software: "<IntelliJ IDEA / VS Code / etc.>"
+  versioncode: "<version>"
+  build: "<build-id>"
+  builddate: "<Month DD, YYYY>"
+  notes: |
+    'Summarize plugin sets, experimental flags, or anything future agents need
+    to reproduce the environment quickly. Keep this section up to date when
+    IDE versions change.'
+
+- title: OS
+  developer: "<Apple / Canonical / Microsoft>"
+  software: "<macOS / Ubuntu / Windows>"
+  chip: "<CPU model>"
+  memory: "<RAM size>"
+  storage: "<Available storage>"
+  notes: |
+    'Capture kernel versions, virtualization settings, or other constraints.'

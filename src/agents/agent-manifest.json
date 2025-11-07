@@ -1,0 +1,69 @@
+{
+  "version": "1.0",
+  "agents": [
+    {
+      "id": "AGENT-001",
+      "name": "QueryAgent",
+      "description": "Retrieves data based on natural-language queries and passes results to downstream tools or agents.",
+      "inputs": {
+        "query": "string",
+        "source": "string (optional)"
+      },
+      "outputs": {
+        "results": "any",
+        "status": "string"
+      }
+    },
+    {
+      "id": "AGENT-002",
+      "name": "ExtractAgent",
+      "description": "Extracts structured data from unstructured input such as documents, web pages, or emails.",
+      "inputs": {
+        "input_data": "string",
+        "extraction_rules": "string (optional)"
+      },
+      "outputs": {
+        "entities": "list<object>",
+        "status": "string"
+      }
+    },
+    {
+      "id": "AGENT-003",
+      "name": "WorkflowAgent",
+      "description": "Coordinates multiple agents in a defined sequence, optionally including conditional branches and fallbacks.",
+      "inputs": {
+        "steps": "list<object>",
+        "context": "object (optional)"
+      },
+      "outputs": {
+        "log": "list<string>",
+        "result": "any"
+      }
+    },
+    {
+      "id": "AGENT-004",
+      "name": "SummarizeAgent",
+      "description": "Summarizes content for human readability or to pass into other systems (e.g., captioning, preview generation).",
+      "inputs": {
+        "content": "string",
+        "style": "string (optional)"
+      },
+      "outputs": {
+        "summary": "string",
+        "status": "string"
+      }
+    },
+    {
+      "id": "AGENT-005",
+      "name": "NotifyAgent",
+      "description": "Sends messages, alerts, or status updates based on trigger rules.",
+      "inputs": {
+        "message": "string",
+        "channel": "string"
+      },
+      "outputs": {
+        "confirmation": "string"
+      }
+    }
+  ]
+}

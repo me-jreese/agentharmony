@@ -1,0 +1,23 @@
+# agents-reference-tasks.yaml
+# Placeholder task registry — to be updated with project-specific items
+
+- id: XXX-TASK-000
+  title: Example Task title
+  description: Example description of what needs to be accomplished for this task to be complete
+  acceptancecriteria:
+    - criteria 0
+    - criteria Z
+  priority: P0
+  assigned_to: AGENT-001
+  status: Planned
+  related_to:
+    - XXX-FTR-001
+
+- id: XXX-TASK-001
+  title: Determine available tooling and access
+  description: Evaluate within the current environment what technologies can be read and/or written to via cli commands in the current terminal session, as well as network and local resource access. Generate a recommendation of how (or if) it should be optimized to enable the agent in this terminal to maximize autonomy for the current scope of work.
+  priority: P0
+  assigned_to: AGENT-004
+  status: Planned
+  related_to:
+    - XXX-FTR-001

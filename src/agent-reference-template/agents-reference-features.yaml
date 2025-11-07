@@ -1,0 +1,11 @@
+# agents-reference-features.yaml
+# Placeholder feature registry — update as project evolves
+
+- id: XXX-FTR-001
+  title: Example short descriptive title
+  description: This is a long an exhaustive description of each feature, its requirements, and acceptance criteria.
+  acceptancecriteria:
+    - criteria 0
+    - criteria Z
+  status: Planned
+

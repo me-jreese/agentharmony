@@ -1,0 +1,7 @@
+# AI Prompt Library Template
+
+(Replace this file with prompts or task macros that fit your workflow. Keep them short, action-oriented, and ready to paste into your LLM of choice.)
+
+Example entries—delete after adding your own:
+- "Set up a containerized test environment that mirrors production dependencies so local validation happens before every major function change."
+- "Summarize available debugging strategies and propose an implementation plan for each in `docs/debug-playbook.md`."
