@@ -107,13 +107,13 @@ _Brief origin story or product motivation._
 
 | ID | Title | Status |
 |----|-------|--------|
-| `FTR-001` | `Login system` | `Complete` |
-| `FTR-002` | `Audit logging` | `In Progress` |
+| `XXX-FTR-001` | `Login system` | `Complete` |
+| `XXX-FTR-002` | `Audit logging` | `In Progress` |
 
 ### 5.2 Feature Details
 
 ```yaml
-- id: FTR-001
+- id: XXX-FTR-001
   title: Login system
   description: Secure authentication for user access
   status: Complete
@@ -125,7 +125,7 @@ _Brief origin story or product motivation._
 ### 5.3 Known Issues
 
 ```yaml
-- id: BUG-007
+- id: XXX-BUG-007
   title: Timeout errors in batch mode
   description: Function hangs when >1000 records
   impacts: [FTR-004, FTR-010]
