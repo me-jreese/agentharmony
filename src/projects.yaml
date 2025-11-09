@@ -1,10 +1,9 @@
-version: 1
-generated_at: "<update-with-iso8601-timestamp>"
+last_updated: "<update-with-iso8601-timestamp>"
 projects:
   - name: example-project
     prefix: EXP
     path: projects/example-project
-    last_sprint: "<YYYY-MM.Sprint>"
+    last_sprint: "<update-with-iso8601-timestamp>" # should be updated with a timestamp each time an agent reads project files and begins new session of work
     summary: >
       Replace this block with a concise description of the project's mission,
       architecture highlights, and current focus. Duplicate this entry for each

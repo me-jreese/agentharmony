@@ -1,0 +1,68 @@
+# global attributes 
+- id:
+  parent: ZZZ-TSK-001 # only when there is one
+  title:
+  status: open, closed
+  description:
+  acceptance_criteria:
+  technical_notes:
+    - distribution-id: E2JCDK3QLQNNYB
+    - account-id: 356364570033
+    - system: cloudflare
+    - any_string: any_string
+  blocked_by: # only when there is one
+    - type: feature, task, issue
+      ids: [XXX-TSK-007]
+  depends_on: # only when there is one
+    - type: feature, task, issue
+      ids: [XXX-FTR-001]
+  related: # only when there is one
+    - type: feature, task, issue
+      ids: [XXX-ISS-000, XXX-ISS-001]
+    - type: feature, task, issue
+      ids: [ZZZ-FTR-001]
+  history: # always has 'created', no more than one 'started', any number of the others
+    - timestamp: 2025-10-07T18:15:00Z
+      status: created
+      description: 
+    - timestamp: 2025-10-08T18:15:00Z
+      status: started
+      description: 
+    - timestamp: 2025-10-09T18:15:00Z
+      status: worklog
+      description: 
+    - timestamp: 2025-10-09T18:15:00Z
+      status: closed
+      description: 
+    - timestamp: 2025-10-09T18:15:00Z
+      status: reopened
+      description: 
+
+# feature
+- id:
+  priority: P0, P1, P2
+  status: planned, in-progress, complete # use only these for features and no others
+
+# task
+- id:
+  priority: P0, P1, P2
+  assigned_to: # can be any agent on agent-manifest.json or the user
+
+# issue
+- id: 
+  hypothesis: 
+  severity: low, medium, high, critical
+
+# projects.yaml -- follows its own unique schema
+
+- last_updated: "<update-with-iso8601-timestamp>" # each time the document is updated by an agent
+- projects:
+    name: example-project
+    prefix: EXP
+    path: projects/example-project
+    last_sprint: "<update-with-iso8601-timestamp>" # should be updated with a timestamp each time an agent reads project files and begins new session of work
+    summary: >
+      Replace this block with a concise description of the project's mission,
+      architecture highlights, and current focus. Duplicate this entry for each
+      active project you want agents to discover automatically.
+    parent: "<optional-parent-project>"

@@ -6,15 +6,16 @@ You are a product engineering team with a group of agents who have full access t
 When this file is invoked directly in a chat UI, it should be assumed that the goal is for the agent to provide as output a fully executable set of terminal commands that can be copied and pasted without any edits or placeholders. This file, its references, and the project references should be utilized to pre-populate as many parameters as possible. When parameters are unknown, the agent should first provide a list of parameters that will be needed to build a set of commands to complete a task.
 
 When invoked anywhere, read these linked files completely to understand operational guidelines:
+[Project Tracking Guidance](agents/agents-reference-project-tracking.md)
+[Numbering Practices](agents/agents-reference-guide-numbering.md)
 [Doc Formatting Practices](agents/agents-reference-markdown.md)
-[Numbering Practices](agents/agents-reference-numbering.md)
 [Agent Manifest](agents/agent-manifest.json)
 [Agent Schema](agents/agent-schema.json)
 
 > [!IMPORTANT]
 > After the context auto-loader streams governance and project files into your session, **do not execute any tasks yet**. Read the loaded material, then brief the user with a concise summary of the project, its current status, and recommended next steps before running further commands.
 
-For all terminal sessions, an environment variable PROJECT is set to the value for the current project. You should treat that variable as the active project context, and bring into context the primary agent-reference files in projects/$PROJECT to stay aligned with the current project’s documentation. Each project we work on should have a directory in [Root directory](projects/) and within that directory you'll find the directory [Project Files Directory](agent-reference/). This directory follows the project template of directory and files in [Agent Reference Template](agent-reference-template/) which is a template populated with example values that should be used to create new projects. When creating a new project, the directory and file name structure should follow projects/\$PROJECT/agent-reference/\$PROJECT-reference.md.
+For all terminal sessions, an environment variable PROJECT is set to the value for the current project. You should treat that variable as the active project context, and bring into context the primary agent-reference files in projects/$PROJECT to stay aligned with the current project’s documentation. Each project we work on should have a directory in [Root directory](projects/) and within that directory you'll find the directory 'agent-reference'. This directory follows the project template of directory and files in [Agent Reference Template](agent-reference-template/) which is a template populated with example values that should be used to create new projects. When creating a new project, the directory and file name structure should follow projects/\$PROJECT/agent-reference/\$PROJECT-reference.md.
 
 When evaluating existing project directories, analyse the current project directory and upgrade it to match the structure of these guidelines. Some projects were started prior to these guidelines being authored. 
 
@@ -28,45 +29,31 @@ When evaluating existing project directories, analyse the current project direct
 
 ## Table of Contents
 
-### [1. Primary Directives](#1-primary-directives)
-- [1.1 Frequent Structured Documentation Updates](#11-documentation)
-- [1.2 Frequent review of Documentation and current context](#12-frequency)
-- [1.3 Verbose debugging strategies](#13-logging)
-- [1.4 Limit autonomous updates to production environment](#14-autonomous)
-- [1.5 Aggressive avoidance of debugging loops](#15-loops)
-- [1.6 Regular plain-english explanations of current tactics and status](#16-status)
-- [1.7 Consistent external memory organization and historical reference](#17-memory)
-
-### [2. Solution preferences](#2-solution-preferences)
-- [2.1 Open Source](#21-open-source)
-- [2.2 AWS](#22-dynamic-autonomous-workflow-v40)
-- [2.3 Abstraction](#23-abstraction)
-- [2.4 Serverless](#24-serverless)
-- [2.5 Containerized x86](#25-containerized)
-- [2.6 Existing Architecture and Tools](#26-tools)
-
-### [3. Existing Architecture and Tools](#3-existing-tools)
-- [3.1 Web Operations (WebOps)](#31-three-tier-memory-model)
-- [3.2 AWS](#32-company-memory-tier-assignments)
-- [3.3 Github](#github)
-- [3.4 Google Workspace](#33-ecs-task-orchestration)
-- [3.5 Local Environment](#34-memory-error-detection--escalation)
-
-### [4. Production Operations](#4-production-operations)
-- [3.1 Standard Operating Procedures](#31-standard-operating-procedures)
-- [3.2 Deployment Procedures](#32-deployment-procedures)
-- [3.3 Monitoring & Alerting](#33-monitoring--alerting)
-- [3.4 Troubleshooting Guide](#34-troubleshooting-guide)
-
-### [4. Development Environment](#4-development-environment)
-- [4.1 Local Development Setup](#41-local-development-setup)
-- [4.2 Container Testing Environment](#42-container-testing-environment)
-- [4.3 Debug Infrastructure](#43-debug-infrastructure)
-
-### [5. Response preferences](#4-development-environment)
-- [4.1 Fully executable CLI commands](#41-local-development-setup)
-- [4.2 Single top-level step scope](#42-container-testing-environment)
-- [4.3 Minimal predictions of what the end user might want next](#43-debug-infrastructure)
+- [1. Primary Directives](#1-primary-directives)
+  - [1.1 Documentation](#11-documentation)
+  - [1.2 Frequency](#12-frequency)
+  - [1.3 Logging](#13-logging)
+  - [1.4 Autonomous](#14-autonomous)
+  - [1.5 Loops](#15-loops)
+  - [1.6 Status](#16-status)
+  - [1.7 Memory](#17-memory)
+- [2. Solution Preferences](#2-solution-preferences)
+  - [2.1 Open Source](#21-open-source)
+  - [2.2 Preferred services](#22-preferred-services)
+  - [2.3 Abstraction](#23-abstraction)
+  - [2.4 Serverless](#24-serverless)
+  - [2.5 Containerized](#25-containerized)
+  - [2.6 Tools](#26-tools)
+- [3. Existing Tools](#3-existing-tools)
+  - [3.1 WebOps](#31-webops)
+  - [3.2 AWS / Azure / GoogleCloud](#32-aws-azure-googlecloud)
+  - [3.3 Github](#33-github)
+  - [3.4 Google Workspace](#34-google-workspace)
+  - [3.5 Local Environment](#35-local-environment)
+- [4. Development Environment](#4-development-environment)
+  - [4.1 Local Development Setup](#41-local-development-setup)
+  - [4.2 Container Testing Environment](#42-container-testing-environment)
+  - [4.3 Debug Infrastructure](#43-debug-infrastructure)
 
 ---
 
@@ -74,7 +61,7 @@ When evaluating existing project directories, analyse the current project direct
 
 **Primary Mission**: Maximize efficiency and effectiveness of LLM agents in terminal CLI tools and UIs
 
-### 1.1 Documenation
+### 1.1 Documentation
 
 It is tantamount that a primary concern of agents is to generate, maintain, update, and organize documentation inter-referenced documentation resources, as well as current and historic product assets. Whenever this file is invoked, the most imperitive primary directive is to maintain a permanent memory of the need to regularly create an update documentation externally.
 
@@ -287,7 +274,7 @@ Document whichever productivity suite the team uses (Google Workspace, Microsoft
 - Accessible products: `Gmail`, `Drive`, `Calendar`, ...
 - Notes: `Reference integration guides`, `List which shared drives include project briefs`, etc.
 
-### 3.4 Local Environment
+### 3.5 Local Environment
 
 **Environment Details**
 - reference: `agents-ide.yaml`

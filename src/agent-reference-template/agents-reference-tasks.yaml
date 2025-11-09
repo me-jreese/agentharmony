@@ -1,23 +1,50 @@
 # agents-reference-tasks.yaml
 # Placeholder task registry — to be updated with project-specific items
 
-- id: XXX-TASK-000
+- id: XXX-TSK-000
   title: Example Task title
-  description: Example description of what needs to be accomplished for this task to be complete
-  acceptancecriteria:
-    - criteria 0
-    - criteria Z
-  priority: P0
+  status: open
   assigned_to: AGENT-001
-  status: Planned
-  related_to:
-    - XXX-FTR-001
+  description: >
+    Example description of what needs to be accomplished for this task to be complete.
+    Replace this with comprehensive details about the work required, context, and any
+    background information that future agents need to understand the scope.
+  acceptance_criteria:
+    - First criterion that must be met for task completion
+    - Second criterion describing expected outcome
+    - Nth criterion ensuring quality and completeness
+  technical_notes:
+    - example-key: example-value
+    - system: placeholder-system
+  related:
+    - type: feature
+      ids: [XXX-FTR-001]
+  history:
+    - timestamp: 2025-11-09T00:00:00Z
+      status: created
+      description: Task created from template
 
-- id: XXX-TASK-001
+- id: XXX-TSK-001
   title: Determine available tooling and access
-  description: Evaluate within the current environment what technologies can be read and/or written to via cli commands in the current terminal session, as well as network and local resource access. Generate a recommendation of how (or if) it should be optimized to enable the agent in this terminal to maximize autonomy for the current scope of work.
-  priority: P0
+  status: open
   assigned_to: AGENT-004
-  status: Planned
-  related_to:
-    - XXX-FTR-001
+  description: >
+    Evaluate within the current environment what technologies can be read and/or
+    written to via cli commands in the current terminal session, as well as network
+    and local resource access. Generate a recommendation of how (or if) it should be
+    optimized to enable the agent in this terminal to maximize autonomy for the
+    current scope of work.
+  acceptance_criteria:
+    - Complete inventory of available CLI tools and access permissions
+    - Network connectivity assessment completed
+    - Recommendations document created with optimization suggestions
+  technical_notes:
+    - environment: terminal-session
+    - scope: tooling-audit
+  related:
+    - type: feature
+      ids: [XXX-FTR-001]
+  history:
+    - timestamp: 2025-11-09T00:00:00Z
+      status: created
+      description: Initial task to assess development environment capabilities

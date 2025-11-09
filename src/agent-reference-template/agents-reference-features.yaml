@@ -3,9 +3,20 @@
 
 - id: XXX-FTR-001
   title: Example short descriptive title
-  description: This is a long an exhaustive description of each feature, its requirements, and acceptance criteria.
-  acceptancecriteria:
-    - criteria 0
-    - criteria Z
-  status: Planned
-
+  status: planned
+  description: >
+    This is a long and exhaustive description of each feature, its requirements,
+    and acceptance criteria. Replace this with comprehensive details about what
+    the feature accomplishes, why it's important, and how it fits into the
+    overall project architecture.
+  acceptance_criteria:
+    - First criterion describing what success looks like
+    - Second criterion defining expected behavior
+    - Nth criterion ensuring quality and completeness
+  technical_notes:
+    - architecture-pattern: placeholder
+    - target-platform: to-be-determined
+  history:
+    - timestamp: 2025-11-09T00:00:00Z
+      status: created
+      description: Feature created from template
