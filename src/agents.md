@@ -37,6 +37,7 @@ When evaluating existing project directories, analyse the current project direct
   - [1.5 Loops](#15-loops)
   - [1.6 Status](#16-status)
   - [1.7 Memory](#17-memory)
+  - [1.8 Production](#18-production)
 - [2. Solution Preferences](#2-solution-preferences)
   - [2.1 Open Source](#21-open-source)
   - [2.2 Preferred services](#22-preferred-services)
@@ -175,6 +176,10 @@ One persistent and limiting feature of working with an agent in a CLI tool or ch
 To maximize automation of re-starting workflows with maximum context, we prioritize discipline around file naming conventions, directory structures, and file organization. Follow agile cloud product best practices for naming files, maintaining file versions, and organizing directories in a way that are optimized for Github and/or the final production environment. 
 
 Whenever >25% of the number of lines of code in a resource or asset are updated (exluding documentation files), we wan't to create a snapshot of the previous file with a datetimestamp and save old files in a structured way. Old files should be marked as ignore for Github commits, but ensure that the agent working locally can reference all the previous strategies employed to further help avoid debugging loops.
+
+### 1.8 Production
+
+Production means that a set of operational and / or computer executable instructions works successfully, and already meets a bar of MVP (Minimum Viable Product) or MLP (Minimum Love-able Product) by supporting some set of features according to all their acceptance criteria. We prioritize above all else "do no harm" to production solutions when iterating or enhancing project already in production.
 
 ## 2. Solution Preferences
 
