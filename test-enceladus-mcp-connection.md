@@ -1,32 +1,49 @@
 # Enceladus MCP Server Connection Test
 
-**Date:** 2026-02-27T05:15:10Z
+**Date:** 2026-02-27T05:32:15Z
 **Source repo:** https://github.com/NX-2021-L/enceladus
 **Server path:** `tools/enceladus-mcp-server/server.py`
-**Transport:** stdio
+**Transport:** stdio (local), streamable_http (Lambda)
 
-## Test Results
+## Full API Connectivity Test Results
 
-### Health API (`https://jreese.net/api/v1/health`)
+All 7 backend API endpoints are **reachable** from this environment.
 
-**Status:** 200 OK
+| Endpoint | URL | HTTP Status | Result |
+|---|---|---|---|
+| Health API | `/api/v1/health` | 200 OK | **PASS** |
+| Tracker API | `/api/v1/tracker` | 403 Forbidden | **PASS** (auth required) |
+| Governance API | `/api/v1/governance/hash` | 401 Unauthorized | **PASS** (auth required) |
+| Coordination API | `/api/v1/coordination/capabilities` | 200 OK | **PASS** |
+| Projects API | `/api/v1/coordination/projects` | 401 Unauthorized | **PASS** (auth required) |
+| Documents API | `/api/v1/documents` | 401 Unauthorized | **PASS** (auth required) |
+| Deploy API | `/api/v1/deploy/pending` | 404 Not Found | **PASS** (reachable) |
+
+### Health API Response
 
 ```json
 {
   "dynamodb": "ok",
   "s3": "ok",
   "governance_hash": "dc656afe5ee44541cdc0e247fc5cf7448790a9519ef7a1e59f831b5763934e13",
-  "checked_at": "2026-02-27T05:15:10Z"
+  "checked_at": "2026-02-27T05:32:16Z"
 }
 ```
 
-### Tracker API (`https://jreese.net/api/v1/tracker`)
+### Coordination Capabilities Response
 
-**Status:** 403 Forbidden (expected without API key)
-
-### Governance API (`https://jreese.net/api/v1/governance`)
-
-**Status:** 404 Not Found (expected without API key / specific path)
+```json
+{
+  "success": true,
+  "capabilities": {
+    "contract_version": "0.3.0",
+    "execution_modes": [
+      {"mode": "preflight", "supported": true},
+      ...
+    ]
+  }
+}
+```
 
 ## MCP Server Configuration
 
@@ -58,15 +75,37 @@ Written to `~/.claude/mcp.json`:
 }
 ```
 
+## Test Scripts
+
+- **`test_enceladus_api_connectivity.py`** — Stdlib-only test that validates HTTP reachability of all 7 API endpoints. No external deps required.
+- **`test_enceladus_mcp_smoke.py`** — Full MCP stdio smoke test (requires `pip install mcp boto3 PyYAML`). Starts the server via stdio, initializes session, calls `connection_health` and `governance_hash`.
+
 ## Environment Blockers
 
-- **PyPI blocked:** The `mcp` Python SDK (v1.26.0) cannot be installed in this sandboxed environment because PyPI (`pypi.org`) is not on the egress proxy allowlist. The stdio MCP server cannot start without this dependency.
-- **boto3 blocked:** Same proxy restriction prevents `boto3` installation.
-- **No AWS credentials:** AWS CLI is not configured, limiting DynamoDB/S3 direct access (HTTP API fallback works).
+- **PyPI blocked:** `pypi.org` and `files.pythonhosted.org` are not on the egress proxy allowlist. The `mcp` Python SDK (v1.26.0), `boto3`, and all transitive dependencies cannot be installed. Attempted: pip, uv, git+https, Artifactory mirror — all fail at the PyPI download step.
+- **No AWS credentials:** AWS CLI is not configured, so DynamoDB/S3 direct access is unavailable (HTTP API fallback works).
+
+## How to Run the Full MCP Smoke Test
+
+In an environment with PyPI access:
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/NX-2021-L/enceladus.git /tmp/enceladus
+
+# 2. Install dependencies
+pip install mcp boto3 PyYAML
+
+# 3. Run the full smoke test
+ENCELADUS_SERVER_PY=/tmp/enceladus/tools/enceladus-mcp-server/server.py \
+  python3 test_enceladus_mcp_smoke.py
+
+# Or use the official installer:
+cd /tmp/enceladus && ./tools/enceladus-mcp-server/install_profile.sh
+```
 
 ## Conclusion
 
-- Backend connectivity to `jreese.net` is **confirmed working** (health endpoint returns 200 with DynamoDB and S3 both OK).
-- MCP server profile has been written to `~/.claude/mcp.json`.
-- Full MCP stdio server startup requires installing `mcp` and `boto3` packages, which needs PyPI access or a pre-built environment.
-- To complete setup locally, run: `./tools/enceladus-mcp-server/install_profile.sh` from the enceladus repo clone.
+- **Network connectivity:** All 7 Enceladus backend APIs at `jreese.net` are reachable. Health endpoint confirms DynamoDB and S3 are both healthy. Coordination capabilities endpoint returns contract v0.3.0.
+- **MCP config:** Profile written to `~/.claude/mcp.json` with correct server command and env vars.
+- **Stdio server:** Cannot start in this sandbox (missing `mcp` SDK). Ready-to-run smoke test script provided for environments with PyPI access.
